@@ -31,4 +31,13 @@ export class ContactComponent implements OnInit {
 		});
 	}
 
+	onSubmit() {
+		console.log('Submit: ', this.contactForm.value);
+		this.contactForm.reset();
+	}
+
+	revert() {
+		this.contactForm.reset();
+	}
+
 }
