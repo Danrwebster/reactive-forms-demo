@@ -11,9 +11,9 @@ import {
 	MatCardModule,
 	MatSnackBarModule } from '@angular/material';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from '@routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { ContactComponent } from '@components/contact/contact.component';
 
 @NgModule({
 	declarations: [

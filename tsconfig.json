@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@models/*": ["src/app/shared/_models/*"],
-      "@components/*": ["src/app/components/*"]
+      "@components/*": ["src/app/components/*"],
+      "@routing/*": ["src/app/shared/_routing/*"]
     }
   }
 }
