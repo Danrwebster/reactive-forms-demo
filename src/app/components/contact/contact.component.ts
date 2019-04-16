@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { PersonalData, ContactRequest } from '@models/contact-request.model';
 
 @Component({
 	selector: 'app-contact',
@@ -12,27 +13,25 @@ export class ContactComponent implements OnInit {
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
 	public contactForm: FormGroup;
 
-	constructor() {
-		this.contactForm = this.createFormGroup();
+	constructor(private _formBuilder: FormBuilder) {
+		this.contactForm = this.createFormGroup(_formBuilder);
 	}
 
 	ngOnInit() {
 	}
 
-	createFormGroup() {
-		return new FormGroup({
-			personalData: new FormGroup({
-				email: new FormControl(),
-				mobile: new FormControl(),
-				country: new FormControl()
-			}),
-			requestType: new FormControl(),
-			text: new FormControl()
+	createFormGroup(formBuilder: FormBuilder) {
+		return formBuilder.group({
+			personalData: formBuilder.group(new PersonalData()),
+			requestType: '',
+			text: ''
 		});
 	}
 
 	onSubmit() {
-		console.log('Submit: ', this.contactForm.value);
+		const result: ContactRequest = Object.assign({}, this.contactForm.value);
+		result.personalData = Object.assign({}, result.personalData);
+		console.log('Submit: ', result);
 		this.contactForm.reset();
 	}
 

@@ -4,7 +4,7 @@ export class ContactRequest {
 	text: string = '';
 }
 
-class PersonalData {
+export class PersonalData {
 	email: string = '';
 	mobile: string = '';
 	country: string = '';
