@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PersonalData, ContactRequest } from '@models/contact-request.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-contact',
@@ -9,11 +10,13 @@ import { PersonalData, ContactRequest } from '@models/contact-request.model';
 })
 export class ContactComponent implements OnInit {
 
-	public countries: string[] = ['USA', 'Germany', 'Italy', 'France'];
+	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
 	public contactForm: FormGroup;
 
-	constructor(private _formBuilder: FormBuilder) {
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _snackBar: MatSnackBar) {
 		this.contactForm = this.createFormGroup(_formBuilder);
 	}
 
@@ -32,6 +35,9 @@ export class ContactComponent implements OnInit {
 		const result: ContactRequest = Object.assign({}, this.contactForm.value);
 		result.personalData = Object.assign({}, result.personalData);
 		console.log('Submit: ', result);
+		this._snackBar.open('Form Submitted Successfully', '', {
+			duration: 2000,
+		});
 		this.contactForm.reset();
 	}
 

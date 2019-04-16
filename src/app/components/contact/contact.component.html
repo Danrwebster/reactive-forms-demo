@@ -1,31 +1,40 @@
-<form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+<div class="container">
+	<mat-card>
+		<mat-card-title>Contact Request Form</mat-card-title>
+		<mat-card-content>
+			<form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
 
-	<mat-form-field class="form-item" formGroupName="personalData" novalidate>
-		<input matInput formControlName="email" placeholder="Email">
-	</mat-form-field>
+				<mat-form-field class="form-item" formGroupName="personalData" novalidate>
+					<input matInput formControlName="email" placeholder="Email">
+				</mat-form-field>
 
-	<mat-form-field class="form-item" formGroupName="personalData" novalidate>
-		<input matInput formControlName="mobile" placeholder="Mobile">
-	</mat-form-field>
+				<mat-form-field class="form-item" formGroupName="personalData" novalidate>
+					<input matInput formControlName="mobile" placeholder="Mobile">
+				</mat-form-field>
 
-	<mat-form-field class="form-item" formGroupName="personalData" novalidate>
-		<mat-select formControlName="country" placeholder="Country">
-			<mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
-		</mat-select>
-	</mat-form-field>
+				<mat-form-field class="form-item" formGroupName="personalData" novalidate>
+					<mat-select formControlName="country" placeholder="Country">
+						<mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+					</mat-select>
+				</mat-form-field>
 
-	<mat-form-field class="form-item">
-		<mat-select formControlName="requestType" placeholder="Request Type">
-			<mat-option *ngFor="let requestType of requestTypes" [value]="requestType">{{requestType}}</mat-option>
-		</mat-select>
-	</mat-form-field>
+				<mat-form-field class="form-item">
+					<mat-select formControlName="requestType" placeholder="Request Type">
+						<mat-option *ngFor="let requestType of requestTypes" [value]="requestType">{{requestType}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 
-	<mat-form-field class="form-item">
-		<input matInput formControlName="text" placeholder="Message">
-	</mat-form-field>
+				<mat-form-field class="form-item">
+					<input matInput formControlName="text" placeholder="Message">
+				</mat-form-field>
 
-	<div class="form-item button-container">
-		<button mat-flat-button [color]="'primary'" [disabled]="contactForm.pristine">Save</button>
-		<button mat-flat-button [color]="'accent'" (click)="revert()" [disabled]="contactForm.pristine">Revert</button>
-	</div>
-</form>
+				<div class="form-item button-container">
+					<button mat-flat-button [color]="'primary'" [disabled]="contactForm.pristine">Save</button>
+					<button mat-flat-button [color]="'accent'" (click)="revert()"
+						[disabled]="contactForm.pristine">Revert</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
