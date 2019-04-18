@@ -41,7 +41,9 @@ export class ContactComponent implements OnInit {
 				address2: [''],
 				city: ['', Validators.required],
 				province: ['', Validators.required],
-				postalCode: ['', Validators.required]
+				postalCode: ['', [Validators.required,
+				// tslint:disable-next-line:max-line-length
+				Validators.pattern('^[ABCEGHJ-NPRSTVXY|abceghj-nprstvxy][0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z] ?[0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z][0-9]$')]]
 			}),
 			email: ['', [Validators.required, Validators.email]],
 			confirmEmail: ['', Validators.required],
@@ -79,6 +81,9 @@ export class ContactComponent implements OnInit {
 			duration: 2000,
 		});
 		this.paymentForm.reset();
+		this.paymentForm.markAsPristine();
+		this.paymentForm.markAsUntouched();
+		this.paymentForm.updateValueAndValidity();
 	}
 
 	reset() {
