@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { PersonalData, ContactRequest } from '@models/contact-request.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PaymentInfo, PaymentOption } from '@models/contact-request.model';
 import { MatSnackBar } from '@angular/material';
+import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 
 @Component({
 	selector: 'app-contact',
@@ -12,37 +13,76 @@ export class ContactComponent implements OnInit {
 
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
-	public contactForm: FormGroup;
+	public paymentForm: FormGroup;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _snackBar: MatSnackBar) {
-		this.contactForm = this.createFormGroup(_formBuilder);
+		this.paymentForm = this.createFormGroup(_formBuilder);
 	}
 
 	ngOnInit() {
 	}
 
-	createFormGroup(formBuilder: FormBuilder) {
+	createFormGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
-			personalData: formBuilder.group(new PersonalData()),
-			requestType: '',
-			text: ''
+			shippingAddress: this.createContactGroup(formBuilder),
+			billingAddress: this.createContactGroup(formBuilder),
+			paymentOption: this.createPaymentGroup(formBuilder)
+		});
+	}
+
+	createContactGroup(formBuilder: FormBuilder): FormGroup {
+		return formBuilder.group({
+			firstName: ['', Validators.required],
+			lastName: ['', Validators.required],
+			address: formBuilder.group({
+				address1: ['', Validators.required],
+				address2: [''],
+				city: ['', Validators.required],
+				province: ['', Validators.required],
+				postalCode: ['', Validators.required]
+			}),
+			email: ['', [Validators.required, Validators.email]],
+			confirmEmail: ['', Validators.required],
+			phone: ['', Validators.required]
+		}, {
+				validator: MustMatch('email', 'confirmEmail')
+			}
+		);
+	}
+
+	createPaymentGroup(formBuilder: FormBuilder): FormGroup {
+		return formBuilder.group({
+			cardNumber: ['', Validators.required],
+			cardType: ['', Validators.required],
+			expireyDate: formBuilder.group({
+				month: ['', Validators.required],
+				year: ['', Validators.required],
+			})
 		});
 	}
 
 	onSubmit() {
-		const result: ContactRequest = Object.assign({}, this.contactForm.value);
-		result.personalData = Object.assign({}, result.personalData);
+		const result: PaymentInfo = Object.assign({}, this.paymentForm.value);
+		result.shippingAddress = Object.assign({}, result.shippingAddress);
+		result.shippingAddress.address = Object.assign({}, result.shippingAddress.address);
+
+		result.billingAddress = Object.assign({}, result.billingAddress);
+		result.billingAddress.address = Object.assign({}, result.billingAddress.address);
+
+		result.paymentOption = Object.assign({}, result.paymentOption);
+		result.paymentOption.expireyDate = Object.assign({}, result.paymentOption.expireyDate);
+
 		console.log('Submit: ', result);
 		this._snackBar.open('Form Submitted Successfully', '', {
 			duration: 2000,
 		});
-		this.contactForm.reset();
+		this.paymentForm.reset();
 	}
 
-	revert() {
-		this.contactForm.reset();
+	reset() {
+		this.paymentForm.reset();
 	}
 
 }

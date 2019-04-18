@@ -18,19 +18,27 @@
     width: 100%;
 }
 
-.button-container {
-    margin-top: 20px;
+.two-item-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 
-    button {
-        flex: 0 0 40%;
-    
-        &:last-of-type {
+    .form-item {
+        flex: 1 1 40%;
+
+        &:first-child {
+            margin-right: 20px;
+        }
+
+        &:only-child {
             margin: 0;
         }
+    }
+
+    button {
+        margin-top: 20px;
+        flex: 0 0 40%;
     }
 }
 

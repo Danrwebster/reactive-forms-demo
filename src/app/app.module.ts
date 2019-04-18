@@ -9,6 +9,7 @@ import {
 	MatSelectModule,
 	MatButtonModule,
 	MatCardModule,
+	MatCheckboxModule,
 	MatSnackBarModule } from '@angular/material';
 
 import { AppRoutingModule } from '@routing/app-routing.module';
@@ -31,6 +32,7 @@ import { ContactComponent } from '@components/contact/contact.component';
 		MatSelectModule,
 		MatButtonModule,
 		MatCardModule,
+		MatCheckboxModule,
 		MatSnackBarModule
 	],
 	providers: [],
