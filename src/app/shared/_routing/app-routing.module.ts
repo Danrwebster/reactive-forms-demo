@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContactComponent } from '@components/contact/contact.component';
+import { CheckoutPageComponent } from '@pages/checkout-page/checkout-page.component';
 
 const routes: Routes = [
-	{ path: '', component: ContactComponent },
+	{ path: '', component: CheckoutPageComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' },
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
 ];

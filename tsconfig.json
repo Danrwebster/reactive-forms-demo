@@ -21,6 +21,7 @@
     "paths": {
       "@models/*": ["src/app/shared/_models/*"],
       "@components/*": ["src/app/components/*"],
+      "@pages/*": ["src/app/pages/*"],
       "@routing/*": ["src/app/shared/_routing/*"]
     }
   }

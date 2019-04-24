@@ -10,16 +10,19 @@ import {
 	MatButtonModule,
 	MatCardModule,
 	MatCheckboxModule,
-	MatSnackBarModule } from '@angular/material';
+	MatSnackBarModule,
+	MatStepperModule } from '@angular/material';
 
 import { AppRoutingModule } from '@routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { ContactComponent } from '@components/contact/contact.component';
+import { CheckoutPageComponent } from '@pages/checkout-page/checkout-page.component';
+import { ContactFormComponent } from '@components/contact-form/contact-form.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ContactComponent
+		CheckoutPageComponent,
+		ContactFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -33,7 +36,8 @@ import { ContactComponent } from '@components/contact/contact.component';
 		MatButtonModule,
 		MatCardModule,
 		MatCheckboxModule,
-		MatSnackBarModule
+		MatSnackBarModule,
+		MatStepperModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

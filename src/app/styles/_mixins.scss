@@ -1,0 +1,7 @@
+@import 'variables';
+
+@mixin breakpoint($device) {
+    @media only screen and (max-width: map-get($resolutions, $device)) {
+        @content;
+    }
+}

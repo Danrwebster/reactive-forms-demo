@@ -5,11 +5,11 @@ import { MatSnackBar } from '@angular/material';
 import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 
 @Component({
-	selector: 'app-contact',
-	templateUrl: './contact.component.html',
-	styleUrls: ['./contact.component.scss']
+	selector: 'app-checkout-page',
+	templateUrl: './checkout-page.component.html',
+	styleUrls: ['./checkout-page.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit {
 
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
