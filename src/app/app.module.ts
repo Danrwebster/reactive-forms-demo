@@ -11,7 +11,8 @@ import {
 	MatCardModule,
 	MatCheckboxModule,
 	MatSnackBarModule,
-	MatStepperModule } from '@angular/material';
+	MatStepperModule,
+	MatDividerModule } from '@angular/material';
 
 import { AppRoutingModule } from '@routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { ContactFormComponent } from '@components/contact-form/contact-form.comp
 		MatCardModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
-		MatStepperModule
+		MatStepperModule,
+		MatDividerModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

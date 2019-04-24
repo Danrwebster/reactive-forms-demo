@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { PaymentInfo, PaymentOption } from '@models/contact-request.model';
 import { MatSnackBar } from '@angular/material';
 import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
@@ -13,18 +13,30 @@ export class CheckoutPageComponent implements OnInit {
 
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
-	public paymentForm: FormGroup;
+	public checkoutForm: FormGroup;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _snackBar: MatSnackBar) {
-		this.paymentForm = this.createFormGroup(_formBuilder);
+		this.checkoutForm = this.createFormGroup(_formBuilder);
 	}
 
 	ngOnInit() {
 	}
 
-	createFormGroup(formBuilder: FormBuilder): FormGroup {
+	public get shippingForm(): AbstractControl {
+		return this.checkoutForm.get('shippingAddress');
+	}
+
+	public get billingForm(): AbstractControl {
+		return this.checkoutForm.get('billingAddress');
+	}
+
+	public get paymentForm(): AbstractControl {
+		return this.checkoutForm.get('paymentOption');
+	}
+
+	public createFormGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
 			shippingAddress: this.createContactGroup(formBuilder),
 			billingAddress: this.createContactGroup(formBuilder),
@@ -32,7 +44,7 @@ export class CheckoutPageComponent implements OnInit {
 		});
 	}
 
-	createContactGroup(formBuilder: FormBuilder): FormGroup {
+	public createContactGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
@@ -54,7 +66,7 @@ export class CheckoutPageComponent implements OnInit {
 		);
 	}
 
-	createPaymentGroup(formBuilder: FormBuilder): FormGroup {
+	public createPaymentGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
 			cardNumber: ['', Validators.required],
 			cardType: ['', Validators.required],
@@ -65,8 +77,8 @@ export class CheckoutPageComponent implements OnInit {
 		});
 	}
 
-	onSubmit() {
-		const result: PaymentInfo = Object.assign({}, this.paymentForm.value);
+	public onSubmit(): void {
+		const result: PaymentInfo = Object.assign({}, this.checkoutForm.value);
 		result.shippingAddress = Object.assign({}, result.shippingAddress);
 		result.shippingAddress.address = Object.assign({}, result.shippingAddress.address);
 
@@ -80,14 +92,18 @@ export class CheckoutPageComponent implements OnInit {
 		this._snackBar.open('Form Submitted Successfully', '', {
 			duration: 2000,
 		});
-		this.paymentForm.reset();
-		this.paymentForm.markAsPristine();
-		this.paymentForm.markAsUntouched();
-		this.paymentForm.updateValueAndValidity();
+		this.checkoutForm.reset();
+		this.checkoutForm.markAsPristine();
+		this.checkoutForm.markAsUntouched();
+		this.checkoutForm.updateValueAndValidity();
 	}
 
-	reset() {
-		this.paymentForm.reset();
+	public reset(): void {
+		this.checkoutForm.reset();
+	}
+
+	public output(): void {
+		console.log(this.checkoutForm);
 	}
 
 }
