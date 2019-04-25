@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { PaymentInfo, PaymentOption } from '@models/contact-request.model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatStepper } from '@angular/material';
 import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 
 @Component({
@@ -11,6 +11,7 @@ import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 })
 export class CheckoutPageComponent implements OnInit {
 
+	@ViewChild('stepper') stepper: MatStepper;
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
 	public checkoutForm: FormGroup;
@@ -22,6 +23,7 @@ export class CheckoutPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.output();
 	}
 
 	public get shippingForm(): AbstractControl {
@@ -88,7 +90,7 @@ export class CheckoutPageComponent implements OnInit {
 		result.paymentOption = Object.assign({}, result.paymentOption);
 		result.paymentOption.expireyDate = Object.assign({}, result.paymentOption.expireyDate);
 
-		console.log('Submit: ', result);
+		// console.log('Submit: ', result);
 		this._snackBar.open('Form Submitted Successfully', '', {
 			duration: 2000,
 		});
@@ -98,12 +100,26 @@ export class CheckoutPageComponent implements OnInit {
 		this.checkoutForm.updateValueAndValidity();
 	}
 
-	public reset(): void {
-		this.checkoutForm.reset();
+	public reset(control: string): void {
+		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).reset();
+		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).setErrors(null);
+		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).markAsUntouched();
+		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).markAsPristine();
+		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).updateValueAndValidity();
+		// this.checkoutForm.controls[`${control}`].reset();
+		// this.checkoutForm.controls[`${control}`].setErrors(null);
+		// this.checkoutForm.controls[`${control}`].markAsUntouched();
+		// this.checkoutForm.controls[`${control}`].markAsPristine();
+		// this.checkoutForm.controls[`${control}`].updateValueAndValidity();
+		(this.shippingForm as FormGroup).reset();
+		(this.shippingForm as FormGroup).setErrors(null);
+		(this.shippingForm as FormGroup).markAsUntouched();
+		(this.shippingForm as FormGroup).markAsPristine();
+		(this.shippingForm as FormGroup).updateValueAndValidity();
 	}
 
 	public output(): void {
-		console.log(this.checkoutForm);
+		// console.log(this.checkoutForm);
+		console.log(this.shippingForm);
 	}
-
 }
