@@ -129,6 +129,11 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 	}
 
 	public resetStepper(): void {
+		this.checkoutForm.reset();
+		this.checkoutForm.setErrors(null);
+		this.checkoutForm.markAsUntouched();
+		this.checkoutForm.markAsPristine();
+		this.checkoutForm.updateValueAndValidity();
 		this.stepper.reset();
 	}
 
