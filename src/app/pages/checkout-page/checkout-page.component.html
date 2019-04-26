@@ -1,7 +1,7 @@
 <div id="container">
 	<mat-horizontal-stepper linear #stepper (selectionChange)="stepperChange($event)">
 		<mat-step label="Shipping" [stepControl]="shippingForm">
-			<mat-card>
+			<mat-card class="mat-elevation-z4">
 				<mat-card-title>
 					Shipping Information
 				</mat-card-title>
@@ -25,7 +25,7 @@
 			</mat-card>
 		</mat-step>
 		<mat-step label="Billing" [stepControl]="billingForm">
-			<mat-card>
+			<mat-card class="mat-elevation-z4">
 				<mat-card-title>
 					Billing Information
 				</mat-card-title>
@@ -44,7 +44,7 @@
 			</mat-card>
 		</mat-step>
 		<mat-step label="Payment" [stepControl]="paymentForm">
-			<mat-card>
+			<mat-card class="mat-elevation-z4">
 				<mat-card-title>
 					Payment Information
 				</mat-card-title>
@@ -62,7 +62,7 @@
 			</mat-card>
 		</mat-step>
 		<mat-step label="Review">
-			<mat-card>
+			<mat-card class="mat-elevation-z4">
 				<mat-card-title>
 					Checkout Review
 				</mat-card-title>
