@@ -5,6 +5,7 @@ import { MatSnackBar, MatStepper } from '@angular/material';
 import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 import { CheckoutFormService } from 'src/app/services/checkout-form.service';
 import { Subscription } from 'rxjs';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -50,6 +51,10 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 	public get paymentForm(): AbstractControl {
 		return this.checkoutForm.get('paymentOption');
+	}
+
+	public get useForBilling(): boolean {
+		return this.checkoutForm.controls['useForBilling'].value;
 	}
 
 	public createFormGroup(formBuilder: FormBuilder): FormGroup {
@@ -129,5 +134,16 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 	public output(): void {
 		console.log(this.checkoutForm);
+	}
+
+	public stepperChange(event: StepperSelectionEvent) {
+		if (event.selectedIndex === 1 && this.useForBilling) {
+			(this.billingForm as FormGroup).setValue((this.shippingForm as FormGroup).value);
+			(this.billingForm as FormGroup).disable();
+			(this.billingForm as FormGroup).markAsTouched();
+			(this.billingForm as FormGroup).markAsDirty();
+		} else {
+			(this.billingForm as FormGroup).enable();
+		}
 	}
 }

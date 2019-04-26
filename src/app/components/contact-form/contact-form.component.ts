@@ -8,7 +8,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class ContactFormComponent implements OnInit {
 
-	@Input() form = FormGroup;
+	@Input() form: FormGroup;
+	@Input() useShipping: boolean;
 
 	constructor() { }
 
