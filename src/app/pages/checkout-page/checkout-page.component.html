@@ -9,17 +9,16 @@
 				<mat-card-content>
 					<app-contact-form [form]="checkoutForm.controls['shippingAddress']"></app-contact-form>
 				</mat-card-content>
-				<form class="form-container" [formGroup]="checkoutForm.controls['shippingAddress']">
-					<mat-checkbox class="form-item" [color]="'primary'">Also use for Billing Address
+				<form class="form-container" [formGroup]="checkoutForm">
+					<mat-checkbox class="form-item" [color]="'primary'" formControlName="useForBilling">
+						Also use for Billing Address
 					</mat-checkbox>
 				</form>
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['shippingAddress']">
 					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="reset('shippingAddress')"
-						[disabled]="checkoutForm.controls['shippingAddress'].pristine">Clear Current</button>
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="stepper.reset()">Reset All</button>
+						(click)="resetCurrent('shippingAddress')"
+						[disabled]="checkoutForm.controls['shippingAddress'].pristine">Clear</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['shippingAddress'].pristine" (click)="output()">Next</button>
 				</form>
@@ -37,10 +36,8 @@
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['billingAddress']">
 					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="reset('billingAddress')"
-						[disabled]="!checkoutForm.controls['billingAddress'].pristine">Clear Current</button>
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="stepper.reset()">Reset All</button>
+						(click)="resetCurrent('billingAddress')"
+						[disabled]="checkoutForm.controls['billingAddress'].pristine">Clear</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['billingAddress'].pristine" (click)="output()">Next</button>
 				</form>
@@ -57,10 +54,8 @@
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['paymentOption']">
 					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="reset('paymentOption')"
-						[disabled]="!checkoutForm.controls['paymentOption'].pristine">Clear Current</button>
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="stepper.reset()">Reset All</button>
+						(click)="resetCurrent('paymentOption')"
+						[disabled]="checkoutForm.controls['paymentOption'].pristine">Clear</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['paymentOption'].pristine" (click)="output()">Next</button>
 				</form>
@@ -78,4 +73,9 @@
 			</mat-card>
 		</mat-step>
 	</mat-horizontal-stepper>
+	<!-- <div class="secondary-color reset-button">
+		<button class="secondary-color" mat-flat-button type="button" [color]="'accent'" (click)="stepper.reset()">
+			Restart
+		</button>
+	</div> -->
 </div>

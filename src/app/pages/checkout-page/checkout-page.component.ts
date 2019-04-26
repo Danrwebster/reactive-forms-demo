@@ -1,29 +1,43 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { PaymentInfo, PaymentOption } from '@models/contact-request.model';
 import { MatSnackBar, MatStepper } from '@angular/material';
 import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
+import { CheckoutFormService } from 'src/app/services/checkout-form.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
 	styleUrls: ['./checkout-page.component.scss']
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 	@ViewChild('stepper') stepper: MatStepper;
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
 	public checkoutForm: FormGroup;
+	private _subscriptions = new Subscription;
 
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _snackBar: MatSnackBar) {
+		private _snackBar: MatSnackBar,
+		private _checkoutFormService: CheckoutFormService) {
 		this.checkoutForm = this.createFormGroup(_formBuilder);
 	}
 
 	ngOnInit() {
-		this.output();
+		// this.output();
+		const resetSub = this._checkoutFormService.$resetForm.subscribe(value => {
+			if (value) {
+				this.resetStepper();
+			}
+		});
+		this._subscriptions.add(resetSub);
+	}
+
+	ngOnDestroy() {
+		this._subscriptions.unsubscribe();
 	}
 
 	public get shippingForm(): AbstractControl {
@@ -41,6 +55,7 @@ export class CheckoutPageComponent implements OnInit {
 	public createFormGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
 			shippingAddress: this.createContactGroup(formBuilder),
+			useForBilling: new FormControl(false),
 			billingAddress: this.createContactGroup(formBuilder),
 			paymentOption: this.createPaymentGroup(formBuilder)
 		});
@@ -100,26 +115,19 @@ export class CheckoutPageComponent implements OnInit {
 		this.checkoutForm.updateValueAndValidity();
 	}
 
-	public reset(control: string): void {
-		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).reset();
-		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).setErrors(null);
-		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).markAsUntouched();
-		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).markAsPristine();
-		// ((this.checkoutForm.controls[`${control}`] as FormGroup).controls['address']).updateValueAndValidity();
-		// this.checkoutForm.controls[`${control}`].reset();
-		// this.checkoutForm.controls[`${control}`].setErrors(null);
-		// this.checkoutForm.controls[`${control}`].markAsUntouched();
-		// this.checkoutForm.controls[`${control}`].markAsPristine();
-		// this.checkoutForm.controls[`${control}`].updateValueAndValidity();
-		(this.shippingForm as FormGroup).reset();
-		(this.shippingForm as FormGroup).setErrors(null);
-		(this.shippingForm as FormGroup).markAsUntouched();
-		(this.shippingForm as FormGroup).markAsPristine();
-		(this.shippingForm as FormGroup).updateValueAndValidity();
+	public resetCurrent(control: string): void {
+		this.checkoutForm.controls[`${control}`].reset();
+		this.checkoutForm.controls[`${control}`].setErrors(null);
+		this.checkoutForm.controls[`${control}`].markAsUntouched();
+		this.checkoutForm.controls[`${control}`].markAsPristine();
+		this.checkoutForm.controls[`${control}`].updateValueAndValidity();
+	}
+
+	public resetStepper(): void {
+		this.stepper.reset();
 	}
 
 	public output(): void {
-		// console.log(this.checkoutForm);
-		console.log(this.shippingForm);
+		console.log(this.checkoutForm);
 	}
 }

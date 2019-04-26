@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	MatToolbarModule,
+	MatIconModule,
 	MatFormFieldModule,
 	MatInputModule,
 	MatSelectModule,
@@ -18,12 +19,14 @@ import { AppRoutingModule } from '@routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutPageComponent } from '@pages/checkout-page/checkout-page.component';
 import { ContactFormComponent } from '@components/contact-form/contact-form.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CheckoutPageComponent,
-		ContactFormComponent
+		ContactFormComponent,
+		NavbarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -31,6 +34,7 @@ import { ContactFormComponent } from '@components/contact-form/contact-form.comp
 		ReactiveFormsModule,
 		BrowserAnimationsModule,
 		MatToolbarModule,
+		MatIconModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatSelectModule,

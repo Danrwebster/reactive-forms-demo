@@ -8,12 +8,23 @@
     justify-content: flex-start;
     align-items: stretch;
 
-    mat-horizontal-stepper {
-        background-color: transparent;
+    .reset-button, mat-horizontal-stepper {
         margin: 0 auto;
         width: 80%;
         max-width: 640px;
         min-width: 320px;
+    }
+
+    .reset-button {
+        margin-top: 20px;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    mat-horizontal-stepper {
+        background-color: transparent;
     }
 
     mat-card {
@@ -53,9 +64,17 @@
 }
 
 ::ng-deep {
-    .mat-step-label {
-        @include breakpoint(laptop) {
-            display: none !important;
+
+    #container {
+        .mat-step-label {
+            @include breakpoint(laptop) {
+                display: none;
+            }
+        }
+    
+        .mat-horizontal-content-container {
+            padding: 0;
         }
     }
+    
 }
