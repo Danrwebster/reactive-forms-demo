@@ -1,46 +1,49 @@
-<form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form autocomplete="on" class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
 
 	<mat-form-field class="form-item half">
-		<input matInput formControlName="firstName" placeholder="First Name" required>
+		<input matInput formControlName="firstName" type="text" autocomplete="given-name" placeholder="First Name" required>
 	</mat-form-field>
 
 	<mat-form-field class="form-item half">
-		<input matInput formControlName="lastName" placeholder="Last Name" required>
+		<input matInput formControlName="lastName" type="text" autocomplete="family-name" placeholder="Last Name" required>
 	</mat-form-field>
 
 	<div class="form-container form-item" formGroupName="address">
 		<mat-form-field class="form-item">
-			<input matInput formControlName="address1" placeholder="Address 1" required>
+			<input matInput formControlName="address1" type="text" autocomplete="shipping street-address" placeholder="Address 1" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item">
-			<input matInput formControlName="address2" placeholder="Address 2">
+			<input matInput formControlName="address2" type="text" placeholder="Address 2">
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="city" placeholder="City" required>
+			<input matInput formControlName="city" type="text" autocomplete="shipping locality" placeholder="City" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="province" placeholder="Province" required>
+			<input matInput formControlName="postalCode" type="text" autocomplete="shipping postal-code" placeholder="Postal Code" required>
+		</mat-form-field>
+		
+		<mat-form-field class="form-item half">
+			<input matInput formControlName="province" type="text" autocomplete="shipping region" placeholder="Province" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="postalCode" placeholder="Postal Code" required>
+			<input matInput formControlName="country" type="text" autocomplete="shipping country" placeholder="Country" required>
 		</mat-form-field>
-		<div class="form-item half"></div>
 	</div>
 
 	<mat-form-field class="form-item half">
-		<input matInput formControlName="email" placeholder="Email" required>
+		<input matInput formControlName="email" type="email" autocomplete="email" placeholder="Email" required>
 	</mat-form-field>
 
 	<mat-form-field class="form-item half">
-		<input matInput formControlName="confirmEmail" placeholder="Confirm Email" required>
+		<input matInput formControlName="confirmEmail" type="email" autocomplete="off" placeholder="Confirm Email" required>
 	</mat-form-field>
 
 	<mat-form-field class="form-item half">
-		<input matInput formControlName="phone" placeholder="Phone" required>
+		<input matInput formControlName="phone" type="tel" autocomplete="tel" placeholder="Phone" required>
 	</mat-form-field>
 
 	<div class="form-item half"></div>

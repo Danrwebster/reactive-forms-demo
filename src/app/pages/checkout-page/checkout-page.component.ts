@@ -74,10 +74,11 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 				address1: ['', Validators.required],
 				address2: [''],
 				city: ['', Validators.required],
-				province: ['', Validators.required],
 				postalCode: ['', [Validators.required,
 				// tslint:disable-next-line:max-line-length
-				Validators.pattern('^[ABCEGHJ-NPRSTVXY|abceghj-nprstvxy][0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z] ?[0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z][0-9]$')]]
+				Validators.pattern('^[ABCEGHJ-NPRSTVXY|abceghj-nprstvxy][0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z] ?[0-9][ABCEGHJ-NPRSTV-Z|abceghj-nprstv-z][0-9]$')]],
+				province: ['', Validators.required],
+				country: ['', Validators.required]
 			}),
 			email: ['', [Validators.required, Validators.email]],
 			confirmEmail: ['', Validators.required],
