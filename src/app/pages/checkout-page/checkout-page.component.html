@@ -1,9 +1,13 @@
 <div id="container">
 	<mat-horizontal-stepper linear #stepper (selectionChange)="stepperChange($event)">
 		<mat-step label="Shipping" [stepControl]="shippingForm">
-			<mat-card class="mat-elevation-z4">
-				<mat-card-title>
+			<mat-card class="mat-elevation-z4" role="form">
+				<mat-card-title class="form-container">
 					Shipping Information
+					<button mat-button (click)="resetCurrent('shippingAddress')"
+						[disabled]="checkoutForm.controls['shippingAddress'].pristine">
+						<mat-icon>clear</mat-icon>
+					</button>
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
@@ -16,54 +20,59 @@
 				</form>
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['shippingAddress']">
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="resetCurrent('shippingAddress')"
-						[disabled]="checkoutForm.controls['shippingAddress'].pristine">Clear</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['shippingAddress'].pristine" (click)="output()">Next</button>
+					<div class="form-item half"></div>
 				</form>
 			</mat-card>
 		</mat-step>
 		<mat-step label="Billing" [stepControl]="billingForm">
-			<mat-card class="mat-elevation-z4">
-				<mat-card-title>
+			<mat-card class="mat-elevation-z4" role="form">
+				<mat-card-title class="form-container">
 					Billing Information
+					<button mat-button (click)="resetCurrent('billingAddress')"
+						[disabled]="checkoutForm.controls['billingAddress'].pristine || useForBilling">
+						<mat-icon>clear</mat-icon>
+					</button>
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
-					<app-contact-form [form]="checkoutForm.controls['billingAddress']" [useShipping]="useForBilling"></app-contact-form>
+					<app-contact-form [form]="checkoutForm.controls['billingAddress']" [useShipping]="useForBilling">
+					</app-contact-form>
 				</mat-card-content>
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['billingAddress']">
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="resetCurrent('billingAddress')"
-						[disabled]="checkoutForm.controls['billingAddress'].pristine || useForBilling">Clear</button>
+					<button class="form-item half" mat-flat-button matStepperPrevious type="button"
+						[color]="'accent'">Previous</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['billingAddress'].pristine" (click)="output()">Next</button>
 				</form>
 			</mat-card>
 		</mat-step>
 		<mat-step label="Payment" [stepControl]="paymentForm">
-			<mat-card class="mat-elevation-z4">
-				<mat-card-title>
+			<mat-card class="mat-elevation-z4" role="form">
+				<mat-card-title class="form-container">
 					Payment Information
+					<button mat-button (click)="resetCurrent('paymentForm')"
+						[disabled]="checkoutForm.controls['paymentOption'].pristine">
+						<mat-icon>clear</mat-icon>
+					</button>
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
 				</mat-card-content>
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['paymentOption']">
-					<button class="form-item half" mat-flat-button type="reset" [color]="'accent'"
-						(click)="resetCurrent('paymentOption')"
-						[disabled]="checkoutForm.controls['paymentOption'].pristine">Clear</button>
+					<button class="form-item half" mat-flat-button matStepperPrevious type="button"
+						[color]="'accent'">Previous</button>
 					<button class="form-item half" mat-flat-button matStepperNext type="button" [color]="'primary'"
 						[disabled]="checkoutForm.controls['paymentOption'].pristine" (click)="output()">Next</button>
 				</form>
 			</mat-card>
 		</mat-step>
-		<mat-step label="Review">
+		<mat-step label="Review" role="contentinfo">
 			<mat-card class="mat-elevation-z4">
-				<mat-card-title>
+				<mat-card-title class="form-container">
 					Checkout Review
 				</mat-card-title>
 				<mat-divider></mat-divider>

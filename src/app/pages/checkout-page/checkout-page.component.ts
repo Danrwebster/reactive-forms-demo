@@ -6,6 +6,7 @@ import { MustMatch } from 'src/app/shared/_helpers/must-match.validator';
 import { CheckoutFormService } from 'src/app/services/checkout-form.service';
 import { Subscription } from 'rxjs';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { LuhnAlgorithm } from 'src/app/shared/_helpers/luhn-algorithm.validator';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -71,8 +72,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			address: formBuilder.group({
-				address1: ['', Validators.required],
-				address2: [''],
+				address: ['', Validators.required],
 				city: ['', Validators.required],
 				postalCode: ['', [Validators.required,
 				// tslint:disable-next-line:max-line-length
@@ -91,13 +91,20 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 	public createPaymentGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
+			cardName: ['', Validators.required],
 			cardNumber: ['', Validators.required],
-			cardType: ['', Validators.required],
+			cardCVC: ['', Validators.required,
+				Validators.pattern('^[0-9]{3}$')],
 			expireyDate: formBuilder.group({
-				month: ['', Validators.required],
-				year: ['', Validators.required],
+				month: ['', Validators.required,
+					Validators.pattern('^(0[1-9]|1[0-2])$')],
+				year: ['', Validators.required,
+					Validators.pattern('^([0-9][0-9])$')],
 			})
-		});
+		}, {
+				validator: LuhnAlgorithm('cardNumber')
+			}
+		);
 	}
 
 	public onSubmit(): void {
