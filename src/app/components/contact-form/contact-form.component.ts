@@ -9,11 +9,15 @@ import { FormGroup } from '@angular/forms';
 export class ContactFormComponent implements OnInit {
 
 	@Input() form: FormGroup;
-	@Input() useShipping: boolean;
+	@Input() formType: string;
 
 	constructor() { }
 
 	ngOnInit() {
+	}
+
+	public labelPrefix(content: string): string {
+		return this.formType + ' ' + content;
 	}
 
 }

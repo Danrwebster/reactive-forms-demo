@@ -10,23 +10,23 @@
 
 	<div autocomplete="on" class="form-container form-item" formGroupName="address">
 		<mat-form-field class="form-item">
-			<input matInput formControlName="address" type="text" autocomplete="shipping street-address" placeholder="Street Address" required>
+			<input matInput formControlName="address" type="text" autocomplete="{{labelPrefix('street-address')}}" placeholder="Street Address" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="city" type="text" autocomplete="shipping locality" placeholder="City" required>
+			<input matInput formControlName="city" type="text" autocomplete="{{labelPrefix('address-level2')}}" placeholder="City" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="postalCode" type="text" autocomplete="shipping postal-code" placeholder="Postal Code" required>
+			<input matInput formControlName="postalCode" type="text" autocomplete="{{labelPrefix('postal-code')}}" placeholder="Postal Code" required>
 		</mat-form-field>
 		
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="province" type="text" autocomplete="shipping region" placeholder="Province" required>
+			<input matInput formControlName="province" type="text" autocomplete="{{labelPrefix('address-level1')}}" placeholder="Province" required>
 		</mat-form-field>
 
 		<mat-form-field class="form-item half">
-			<input matInput formControlName="country" type="text" autocomplete="shipping country" placeholder="Country" required>
+			<input matInput formControlName="country" type="text" autocomplete="{{labelPrefix('country-name')}}" placeholder="Country" required>
 		</mat-form-field>
 	</div>
 

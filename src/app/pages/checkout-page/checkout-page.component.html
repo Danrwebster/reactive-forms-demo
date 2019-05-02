@@ -11,7 +11,7 @@
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
-					<app-contact-form [form]="checkoutForm.controls['shippingAddress']"></app-contact-form>
+					<app-contact-form [form]="checkoutForm.controls['shippingAddress']" [formType]="'shipping'"></app-contact-form>
 				</mat-card-content>
 				<form class="form-container" [formGroup]="checkoutForm">
 					<mat-checkbox class="form-item" [color]="'primary'" formControlName="useForBilling">
@@ -37,7 +37,7 @@
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
-					<app-contact-form [form]="checkoutForm.controls['billingAddress']" [useShipping]="useForBilling">
+					<app-contact-form [form]="checkoutForm.controls['billingAddress']" [formType]="'billing'">
 					</app-contact-form>
 				</mat-card-content>
 				<mat-divider></mat-divider>
