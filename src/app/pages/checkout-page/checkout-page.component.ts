@@ -15,7 +15,7 @@ import { LuhnAlgorithm } from 'src/app/shared/_helpers/luhn-algorithm.validator'
 })
 export class CheckoutPageComponent implements OnInit, OnDestroy {
 
-	@ViewChild('stepper') stepper: MatStepper;
+	@ViewChild('stepper', { static: true }) stepper: MatStepper;
 	public countries: string[] = ['Canada', 'USA', 'Mexico'];
 	public requestTypes: string[] = ['Claim', 'Feedback', 'Help Request'];
 	public checkoutForm: FormGroup;
