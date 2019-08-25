@@ -1,0 +1,35 @@
+:host {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.form-container {
+    margin: 20px 0 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .form-container {
+        margin: 0;
+        flex: 1 0 auto;
+        width: 100%;
+    }
+
+    &.form-item {
+        margin-right: 0;
+    }
+}
+
+.form-item {
+    flex: 1 0 60%;
+    margin-right: 20px;
+
+    &.half {
+        flex: 1 0 45%;
+    }
+}

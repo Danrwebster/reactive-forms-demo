@@ -11,7 +11,8 @@
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
-					<app-contact-form [form]="checkoutForm.controls['shippingAddress']" [formType]="'shipping'"></app-contact-form>
+					<app-contact-form [form]="checkoutForm.controls['shippingAddress']" [formType]="'shipping'">
+					</app-contact-form>
 				</mat-card-content>
 				<form class="form-container" [formGroup]="checkoutForm">
 					<mat-checkbox class="form-item" [color]="'primary'" formControlName="useForBilling">
@@ -53,13 +54,15 @@
 			<mat-card class="mat-elevation-z4" role="form">
 				<mat-card-title class="form-container">
 					Payment Information
-					<button mat-button (click)="resetCurrent('paymentForm')"
+					<button mat-button (click)="resetCurrent('paymentOption')"
 						[disabled]="checkoutForm.controls['paymentOption'].pristine">
 						<mat-icon>clear</mat-icon>
 					</button>
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
+					<app-payment-form [form]="checkoutForm.controls['paymentOption']">
+					</app-payment-form>
 				</mat-card-content>
 				<mat-divider></mat-divider>
 				<form class="form-container" [formGroup]="checkoutForm.controls['paymentOption']">
@@ -77,6 +80,7 @@
 				</mat-card-title>
 				<mat-divider></mat-divider>
 				<mat-card-content>
+					<!-- INSERT REVIEW COMPONENT HERE -->
 				</mat-card-content>
 				<mat-divider></mat-divider>
 			</mat-card>

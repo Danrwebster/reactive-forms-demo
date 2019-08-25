@@ -91,15 +91,15 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 	public createPaymentGroup(formBuilder: FormBuilder): FormGroup {
 		return formBuilder.group({
-			cardName: ['', Validators.required],
+			cardType: ['', Validators.required],
 			cardNumber: ['', Validators.required],
-			cardCVC: ['', Validators.required,
-				Validators.pattern('^[0-9]{3}$')],
+			cardCVC: ['', [Validators.required,
+				Validators.pattern('^[0-9]{3}$')]],
 			expireyDate: formBuilder.group({
-				month: ['', Validators.required,
-					Validators.pattern('^(0[1-9]|1[0-2])$')],
-				year: ['', Validators.required,
-					Validators.pattern('^([0-9][0-9])$')],
+				month: ['', [Validators.required,
+					Validators.pattern('^(0[1-9]|1[0-2])$')]],
+				year: ['', [Validators.required,
+					Validators.pattern('^([0-9][0-9])$')]],
 			})
 		}, {
 				validator: LuhnAlgorithm('cardNumber')

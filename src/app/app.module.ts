@@ -20,13 +20,15 @@ import { AppComponent } from './app.component';
 import { CheckoutPageComponent } from '@pages/checkout-page/checkout-page.component';
 import { ContactFormComponent } from '@components/contact-form/contact-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CheckoutPageComponent,
 		ContactFormComponent,
-		NavbarComponent
+		NavbarComponent,
+		PaymentFormComponent
 	],
 	imports: [
 		BrowserModule,

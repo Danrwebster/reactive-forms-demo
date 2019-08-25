@@ -1,0 +1,26 @@
+<form autocomplete="off" class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="form-item">
+        <input matInput formControlName="cardType" type="text" placeholder="Card Type" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-item">
+        <input matInput formControlName="cardNumber" type="text" placeholder="Card Number" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-item half">
+        <input matInput formControlName="cardCVC" type="text" placeholder="CVC" required>
+    </mat-form-field>
+
+    <div autocomplete="off" class="form-container form-item" formGroupName="expireyDate">
+        <mat-form-field class="form-item half">
+            <input matInput formControlName="month" type="text" placeholder="Month" required>
+        </mat-form-field>
+
+        <mat-form-field class="form-item half">
+            <input matInput formControlName="year" type="text" placeholder="Year" required>
+        </mat-form-field>
+    </div>
+
+    <div class="form-item half"></div>
+</form>
